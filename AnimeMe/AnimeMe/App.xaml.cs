@@ -1,7 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using AnimeMe.Services;
 using AnimeMe.Views;
 
 namespace AnimeMe
@@ -13,8 +12,9 @@ namespace AnimeMe
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            //DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
+            Shell.Current.GoToAsync("//LoginPage");
         }
 
         protected override void OnStart()
