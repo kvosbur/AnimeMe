@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="AnimeMe.Views.LoginPage"
-             Shell.NavBarIsVisible="False">
+             x:Class="AnimeMe.Views.RegisterPage">
     <ContentPage.Content>
         <StackLayout Padding="10,0,10,0" Spacing="20" VerticalOptions="Center" Margin="30,0">
             <Label
-                Text="Anime Me"
+                Text="Register"
                 FontSize="24"
                 HorizontalOptions="CenterAndExpand"
                 TextColor="Black"/>
-            
+
+            <Entry x:Name="Email"
+                   Placeholder="Email" 
+                   TextColor="Black"
+                   PlaceholderColor="LightGray"/>
             <Entry x:Name="Username"
                    Placeholder="Username" 
                    TextColor="Black"
@@ -23,8 +23,12 @@
                    Placeholder="Password" 
                    TextColor="Black"
                    PlaceholderColor="LightGray"/>
-            <Button VerticalOptions="Center" Text="Login" Clicked="OnLoginClicked" />
-            <Button VerticalOptions="Center" Text="Register" Clicked="OnRegisterClicked" />
+            <Entry x:Name="Password1" 
+                   IsPassword="True" 
+                   Placeholder="Confirm Password" 
+                   TextColor="Black"
+                   PlaceholderColor="LightGray"/>
+            <Button VerticalOptions="Center" Text="Submit" Clicked="OnRegisterClicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

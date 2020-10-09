@@ -7,16 +7,16 @@ using Xamarin.Forms;
 
 namespace AnimeMe.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class RegisterViewModel : BaseViewModel
     {
         LoginHelper helper;
 
-        public LoginViewModel()
+        public RegisterViewModel()
         {
             helper = new LoginHelper();
         }
 
-        public async void OnLoginClicked(string username, string password)
+        public async void OnSubmitClicked(string email, string username, string password, string confirmPassword)
         {
             if (username == string.Empty || password == string.Empty)
             {
