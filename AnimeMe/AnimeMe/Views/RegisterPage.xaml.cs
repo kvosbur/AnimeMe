@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AnimeMe.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,19 +13,19 @@ namespace AnimeMe.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterPage : ContentPage
     {
+        RegisterViewModel viewModel;
+
         public RegisterPage()
         {
             InitializeComponent();
+
+            viewModel = new RegisterViewModel();
+            BindingContext = viewModel;
         }
 
-        private void OnLoginClicked( object sender, EventArgs e)
+        private void OnSubmitClicked(object sender, EventArgs e)
         {
-            // viewModel.OnLoginClicked(Username.Text, Password.Text);
-        }
-
-        private void OnRegisterClicked(object sender, EventArgs e)
-        {
-            Shell.Current.GoToAsync($"//{nameof(RegisterPage)}");
+            viewModel.OnSubmitClicked(Email.Text, Username.Text, Password.Text, ConfirmPassword.Text);
         }
     }
 }

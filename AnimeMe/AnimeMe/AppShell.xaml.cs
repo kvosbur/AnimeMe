@@ -11,8 +11,11 @@ namespace AnimeMe
         public AppShell()
         {
             InitializeComponent();
-            //Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
             Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
+            Routing.RegisterRoute("discover/edit", typeof(AnimeMe.Views.Profile.EditPage));
+            //Routing.RegisterRoute("profile", typeof(AnimeMe.Views.Profile.ProfilePage));
+            //Routing.RegisterRoute("discover", typeof(AnimeMe.Views.Discover.DiscoverPage));
+            //Routing.RegisterRoute("playlist", typeof(AnimeMe.Views.Playlist.PlaylistPage));
         }
 
     }

@@ -17,6 +17,24 @@ namespace AnimeMe.Networking
             httpClient = new HttpClient();
         }
 
+        protected async Task<string> get(string path, Dictionary<string, string> headers)
+        {
+            Uri uri = new Uri(BASE_URL, path);
+
+            var request = new HttpRequestMessage(HttpMethod.Get, uri);
+            foreach(KeyValuePair<string, string> header in headers)
+            {
+                request.Headers.Add(header.Key, header.Value);
+            }
+
+            HttpResponseMessage responseMessage = await httpClient.SendAsync(request);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return await responseMessage.Content.ReadAsStringAsync();
+            }
+            return null;
+        }
+
         protected async Task<string> get(string path)
         {
             Uri uri = new Uri(BASE_URL, path);

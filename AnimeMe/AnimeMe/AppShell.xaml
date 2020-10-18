@@ -2,6 +2,9 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:AnimeMe.Views"
+       xmlns:discover="clr-namespace:AnimeMe.Views.Discover"
+       xmlns:playlist="clr-namespace:AnimeMe.Views.Playlist"
+       xmlns:profile="clr-namespace:AnimeMe.Views.Profile"
        Title="AnimeMe"
        x:Class="AnimeMe.AppShell">
 
@@ -27,14 +30,22 @@
             <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
             <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
         </ResourceDictionary>
+        <OnPlatform x:Key="MaterialFontFamily" x:TypeArguments="x:String">
+            <On Platform="iOS" Value="Material Design Icons" />
+            <On Platform="Android" Value="materialdesignicons-webfont.ttf#Material Design Icons" />
+        </OnPlatform>
     </Shell.Resources>
 
-    <!--
-    <TabBar>
-        <ShellContent Title="About" Icon="tab_about.png" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
-        <ShellContent Title="Browse" Icon="tab_feed.png" ContentTemplate="{DataTemplate local:ItemsPage}" />
+    
+
+    <TabBar >
+        <Tab Title="Discover">
+            <ShellContent Route="discover" ContentTemplate="{DataTemplate discover:DiscoverPage}"/>
+        </Tab>
+        
+        <ShellContent Title="Playlist" Route="playlist" ContentTemplate="{DataTemplate playlist:PlaylistPage}" />
+        <ShellContent Title="Profile" Route="profile" ContentTemplate="{DataTemplate profile:ProfilePage}" />
     </TabBar>
-    -->
 
     <!--
         If you would like to navigate to this content you can do so by calling

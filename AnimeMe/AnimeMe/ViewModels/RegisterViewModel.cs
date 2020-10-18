@@ -18,19 +18,24 @@ namespace AnimeMe.ViewModels
 
         public async void OnSubmitClicked(string email, string username, string password, string confirmPassword)
         {
-            if (username == string.Empty || password == string.Empty)
+            if (email == string.Empty || username == string.Empty || password == string.Empty || confirmPassword == string.Empty)
             {
-                await Shell.Current.DisplayAlert("Empty Entries", "Username and Password must be non-empty", "Ok");
+                await Shell.Current.DisplayAlert("Empty Entries", "All entries must be non-empty", "Ok");
                 return;
             }
 
-            var response = await helper.postLogin(username, password);
+            if(password != confirmPassword)
+            {
+                await Shell.Current.DisplayAlert("Password Mismatch", "Both passwords must be the same.", "Ok");
+                return;
+            }
+
+            var response = await helper.postRegister(email, username, password);
             if(response.statusCode != 0)
             {
-                await Shell.Current.DisplayAlert("Login Error", response.message, "Ok");
+                await Shell.Current.DisplayAlert("Register Error", response.message, "Ok");
             }
-            // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-            //await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+            await Shell.Current.GoToAsync($"//{nameof(AnimeMe.Views.Discover.DiscoverPage)}");
         }
     }
 }

@@ -3,6 +3,7 @@ using AnimeMe.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace AnimeMe.ViewModels
@@ -14,6 +15,18 @@ namespace AnimeMe.ViewModels
         public LoginViewModel()
         {
             helper = new LoginHelper();
+        }
+
+        public async void DoAuthCodeLoginIfInPrefs()
+        {
+            var authCode = Preferences.Get(SharedPreferences.AUTH_CODE, string.Empty);
+            if(authCode != string.Empty)
+            {
+                if(await helper.getLoginWithAuth(authCode) != null)
+                {
+                    await Shell.Current.GoToAsync("//discover");
+                }
+            }
         }
 
         public async void OnLoginClicked(string username, string password)

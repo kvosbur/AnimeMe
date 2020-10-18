@@ -52,6 +52,52 @@ namespace AnimeMe.Helpers
 
                 Console.WriteLine(returnData.message + " " + returnData.data.authCode);
                 Preferences.Set(SharedPreferences.AUTH_CODE, returnData.data.authCode);
+                Preferences.Set(SharedPreferences.ADMIN_TYPE, returnData.data.adminType);
+                return returnData;
+            }
+            else
+            {
+                LoginErrorResponse returnData = JsonConvert.DeserializeObject<LoginErrorResponse>(content);
+
+                Console.WriteLine(returnData.message + " " + returnData.statusCode);
+                return returnData;
+            }
+        }
+
+        public async Task<LoginResponse> getLoginWithAuth(string authCode)
+        {
+
+            string result = await get("/user/loginWithAuth", new Dictionary<string, string> { { "authCode", authCode } });
+
+            if (result != null)
+            {
+                LoginReturn returnData = JsonConvert.DeserializeObject<LoginReturn>(result);
+
+                Console.WriteLine(returnData.message + " " + returnData.data.adminType);
+                Preferences.Set(SharedPreferences.ADMIN_TYPE, returnData.data.adminType);
+                return returnData;
+            }
+            return null;
+        }
+
+        public async Task<LoginResponse> postRegister(string email, string username, string password)
+        {
+            var formContent = new FormUrlEncodedContent(new[]
+                {
+                    new KeyValuePair<string, string>("email", email),
+                    new KeyValuePair<string, string>("username", username),
+                    new KeyValuePair<string, string>("password", password)
+                });
+
+            HttpResponseMessage result = await post("/user/register", formContent);
+            string content = await result.Content.ReadAsStringAsync();
+
+            if (result.IsSuccessStatusCode)
+            {
+                LoginReturn returnData = JsonConvert.DeserializeObject<LoginReturn>(content);
+
+                Console.WriteLine(returnData.message + " " + returnData.data.authCode);
+                Preferences.Set(SharedPreferences.AUTH_CODE, returnData.data.authCode);
                 Preferences.Set(SharedPreferences.ADMIN_TYPE, returnData.data.authCode);
                 return returnData;
             }
@@ -62,8 +108,6 @@ namespace AnimeMe.Helpers
                 Console.WriteLine(returnData.message + " " + returnData.statusCode);
                 return returnData;
             }
-
-            
-        } 
+        }
     }
 }

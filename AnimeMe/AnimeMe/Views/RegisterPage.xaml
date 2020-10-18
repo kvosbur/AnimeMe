@@ -23,12 +23,12 @@
                    Placeholder="Password" 
                    TextColor="Black"
                    PlaceholderColor="LightGray"/>
-            <Entry x:Name="Password1" 
+            <Entry x:Name="ConfirmPassword" 
                    IsPassword="True" 
                    Placeholder="Confirm Password" 
                    TextColor="Black"
                    PlaceholderColor="LightGray"/>
-            <Button VerticalOptions="Center" Text="Submit" Clicked="OnRegisterClicked" />
+            <Button VerticalOptions="Center" Text="Submit" Clicked="OnSubmitClicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

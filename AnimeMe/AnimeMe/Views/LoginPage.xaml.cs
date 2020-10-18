@@ -20,6 +20,7 @@ namespace AnimeMe.Views
             viewModel = new LoginViewModel();
             this.BindingContext = viewModel;
 
+            viewModel.DoAuthCodeLoginIfInPrefs();
         }
 
         private void OnLoginClicked(object sender, EventArgs e)
