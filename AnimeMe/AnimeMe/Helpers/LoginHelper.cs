@@ -1,4 +1,5 @@
 ﻿using AnimeMe.Networking;
+using AnimeMe.Networking.NetworkModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,28 +10,6 @@ using Xamarin.Essentials;
 
 namespace AnimeMe.Helpers
 {
-    public class LoginData
-    {
-        public string authCode { get; set; }
-        public int adminType { get; set; }
-    }
-
-    public class LoginResponse
-    {
-        public string message { get; set; }
-        public int statusCode { get; set; }
-    }
-
-    public class LoginReturn : LoginResponse
-    {
-        
-        public LoginData data { get; set; }
-    }
-
-    public class LoginErrorResponse : LoginResponse
-    {
-        public string data { get; set; }
-    }
 
     public class LoginHelper : AnimeHttpClient
     {

@@ -10,16 +10,16 @@ using Xamarin.Forms.Xaml;
 namespace AnimeMe.Views.Profile
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ProfilePage : ContentPage
+    public partial class AddAnimePage : ContentPage
     {
-        public ProfilePage()
+        public AddAnimePage()
         {
             InitializeComponent();
         }
 
-        private void AddAnimeClicked(object sender, EventArgs e)
+        private void OnAnimeSubmit(object sender, EventArgs e)
         {
-            Shell.Current.GoToAsync("profile/addAnime");
+            var imageUrl = "https://images.pexels.com/users/avatars/322032/apalad-kun-474.jpeg?w=256&h=256&fit=crop&auto=compress";
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using AnimeMe.ViewModels;
 using AnimeMe.Views;
+using AnimeMe.Views.Profile;
 using Xamarin.Forms;
 
 namespace AnimeMe
@@ -12,10 +13,8 @@ namespace AnimeMe
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
-            Routing.RegisterRoute("discover/edit", typeof(AnimeMe.Views.Profile.EditPage));
-            //Routing.RegisterRoute("profile", typeof(AnimeMe.Views.Profile.ProfilePage));
-            //Routing.RegisterRoute("discover", typeof(AnimeMe.Views.Discover.DiscoverPage));
-            //Routing.RegisterRoute("playlist", typeof(AnimeMe.Views.Playlist.PlaylistPage));
+            //Routing.RegisterRoute("discover/edit", typeof(AnimeMe.Views.Profile.EditPage));
+            Routing.RegisterRoute("profile/addAnime", typeof(AddAnimePage));
         }
 
     }
