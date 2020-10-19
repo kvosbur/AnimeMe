@@ -34,6 +34,7 @@ namespace AnimeMe.ViewModels
             if(response.statusCode != 0)
             {
                 await Shell.Current.DisplayAlert("Register Error", response.message, "Ok");
+                return;
             }
             await Shell.Current.GoToAsync($"//{nameof(AnimeMe.Views.Discover.DiscoverPage)}");
         }

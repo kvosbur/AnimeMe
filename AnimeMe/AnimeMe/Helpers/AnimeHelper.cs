@@ -1,38 +1,42 @@
 ﻿using AnimeMe.Networking;
+using AnimeMe.Networking.NetworkModels.Anime;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace AnimeMe.Helpers
 {
     class AnimeHelper: AnimeHttpClient
     {
-        public async Task<LoginResponse> postLogin(string username, string password)
+        public async Task<string> postDetail(string animeNameEN, string animeNameJP, string releaseDate, string animeImage)
         {
             var formContent = new FormUrlEncodedContent(new[]
                 {
-                    new KeyValuePair<string, string>("username", username),
-                    new KeyValuePair<string, string>("password", password)
+                    new KeyValuePair<string, string>("animeNameEN", animeNameEN),
+                    new KeyValuePair<string, string>("animeNameJP", animeNameJP),
+                    new KeyValuePair<string, string>("releaseDate", releaseDate),
+                    new KeyValuePair<string, string>("animeImage", animeImage),
                 });
 
-            HttpResponseMessage result = await post("/user/login", formContent);
+            var authCode = Preferences.Get(SharedPreferences.AUTH_CODE, string.Empty);
+
+            HttpResponseMessage result = await post("/anime/detail", formContent, new Dictionary<string, string> { { "authCode", authCode } });
             string content = await result.Content.ReadAsStringAsync();
 
             if (result.IsSuccessStatusCode)
             {
-                LoginReturn returnData = JsonConvert.DeserializeObject<LoginReturn>(content);
-
-                Console.WriteLine(returnData.message + " " + returnData.data.authCode);
-                Preferences.Set(SharedPreferences.AUTH_CODE, returnData.data.authCode);
-                Preferences.Set(SharedPreferences.ADMIN_TYPE, returnData.data.adminType);
-                return returnData;
+                return null;
             }
             else
             {
-                LoginErrorResponse returnData = JsonConvert.DeserializeObject<LoginErrorResponse>(content);
+                var returnData = JsonConvert.DeserializeObject<AnimeBasePost>(content);
 
-                Console.WriteLine(returnData.message + " " + returnData.statusCode);
-                return returnData;
+                Console.WriteLine(returnData.message);
+                return returnData.message;
             }
         }
     }

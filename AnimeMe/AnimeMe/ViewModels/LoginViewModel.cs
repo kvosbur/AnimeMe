@@ -42,8 +42,6 @@ namespace AnimeMe.ViewModels
             {
                 await Shell.Current.DisplayAlert("Login Error", response.message, "Ok");
             }
-            // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-            //await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
         }
     }
 }

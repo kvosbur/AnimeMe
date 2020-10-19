@@ -52,8 +52,23 @@ namespace AnimeMe.Networking
             Uri uri = new Uri(BASE_URL, path);
 
 
-            HttpResponseMessage responseMessage = await httpClient.PostAsync(uri, content);
-            return responseMessage;
+            return await httpClient.PostAsync(uri, content);
+        }
+
+        protected async Task<HttpResponseMessage> post(string path, FormUrlEncodedContent content, Dictionary<string, string> headers)
+        {
+            Uri uri = new Uri(BASE_URL, path);
+
+            var request = new HttpRequestMessage(HttpMethod.Post, uri)
+            {
+                Content = content
+            };
+            foreach (KeyValuePair<string, string> header in headers)
+            {
+                request.Headers.Add(header.Key, header.Value);
+            }
+
+            return await httpClient.SendAsync(request);
         }
     }
 }
