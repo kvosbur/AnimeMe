@@ -46,11 +46,12 @@ namespace AnimeMe.Helpers
         public async Task<LoginResponse> getLoginWithAuth(string authCode)
         {
 
-            string result = await get("/user/loginWithAuth", new Dictionary<string, string> { { "authCode", authCode } });
+            HttpResponseMessage result = await get("/user/loginWithAuth", new Dictionary<string, string> { { "authCode", authCode } });
 
-            if (result != null)
+            if (result.IsSuccessStatusCode)
             {
-                LoginReturn returnData = JsonConvert.DeserializeObject<LoginReturn>(result);
+                string content = await result.Content.ReadAsStringAsync();
+                LoginReturn returnData = JsonConvert.DeserializeObject<LoginReturn>(content);
 
                 Console.WriteLine(returnData.message + " " + returnData.data.adminType);
                 Preferences.Set(SharedPreferences.ADMIN_TYPE, returnData.data.adminType);

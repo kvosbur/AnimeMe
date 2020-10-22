@@ -4,8 +4,8 @@ using System.Text;
 
 namespace AnimeMe.Networking.NetworkModels.Anime
 {
-    class AnimeFeed
+    public class AnimeFeed
     {
-        List<AnimeFeedDetail> Feed { get; set; }
+        public List<AnimeFeedDetail> data { get; set; }
     }
 }

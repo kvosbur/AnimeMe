@@ -43,16 +43,13 @@ namespace AnimeMe.Helpers
 
         public async Task<AnimeFeed> getAnimeFeed(string animeNameEN, string animeNameJP)
         {
-            var builder = new UriBuilder("/anime/feed");
-
-            var query = HttpUtility.ParseQueryString(builder.Query);
+            var query = HttpUtility.ParseQueryString(string.Empty);
             query["animeNameEN"] = animeNameEN;
             query["animeNameJP"] = animeNameJP;
-            builder.Query = query.ToString();
 
             var authCode = Preferences.Get(SharedPreferences.AUTH_CODE, string.Empty);
 
-            HttpResponseMessage result = await get(builder.ToString(), new Dictionary<string, string> { { "authCode", authCode } });
+            HttpResponseMessage result = await get("anime/feed?" + query.ToString(), new Dictionary<string, string> { { "authCode", authCode } });
 
             if (result.IsSuccessStatusCode)
             {

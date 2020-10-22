@@ -38,7 +38,7 @@ namespace AnimeMe.ViewModels
                 return;
             }
 
-            await Shell.Current.GoToAsync("..");
+            await Shell.Current.Navigation.PopAsync();
         }
     }
 }

@@ -9,8 +9,8 @@ namespace AnimeMe.ViewModels.Discover.Anime
     class AnimeFeedViewModel : BaseViewModel
     {
 
-        AnimeFeed feed = null;
-        public AnimeFeed Feed
+        List<AnimeFeedDetail> feed = null;
+        public List<AnimeFeedDetail> Feed
         {
             get { return feed; }
             set { SetProperty(ref feed, value); }
@@ -28,7 +28,7 @@ namespace AnimeMe.ViewModels.Discover.Anime
             var results = await helper.getAnimeFeed("", "");
             if (results != null)
             {
-                feed = results;
+                feed = results.data;
             }
         }
 

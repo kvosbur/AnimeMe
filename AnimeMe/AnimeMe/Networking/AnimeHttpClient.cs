@@ -10,7 +10,8 @@ namespace AnimeMe.Networking
     {
 
         private HttpClient httpClient;
-        private Uri BASE_URL = new Uri("https://kevinvosburgh.com:40000");
+        // private Uri BASE_URL = new Uri("https://kevinvosburgh.com:40000");
+        private Uri BASE_URL = new Uri("http://192.168.1.246:5000");
 
         public AnimeHttpClient()
         {
@@ -20,6 +21,8 @@ namespace AnimeMe.Networking
         protected async Task<HttpResponseMessage> get(string path, Dictionary<string, string> headers)
         {
             Uri uri = new Uri(BASE_URL, path);
+
+            Console.WriteLine(path);
 
             var request = new HttpRequestMessage(HttpMethod.Get, uri);
             foreach(KeyValuePair<string, string> header in headers)

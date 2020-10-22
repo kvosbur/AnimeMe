@@ -24,7 +24,7 @@ namespace AnimeMe.ViewModels
             {
                 if(await helper.getLoginWithAuth(authCode) != null)
                 {
-                    await Shell.Current.GoToAsync("//discover");
+                    await Shell.Current.GoToAsync("//animeFeed");
                 }
             }
         }

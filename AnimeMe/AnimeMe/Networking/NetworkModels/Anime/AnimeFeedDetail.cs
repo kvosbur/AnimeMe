@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AnimeMe.Networking.NetworkModels.Anime
 {
-    class AnimeFeedDetail
+    public class AnimeFeedDetail
     {
         public string id { get; set; }
         public string nameEnglish { get; set; }
