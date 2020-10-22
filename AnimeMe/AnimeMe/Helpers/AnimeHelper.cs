@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Xamarin.Essentials;
 
 namespace AnimeMe.Helpers
@@ -38,6 +39,28 @@ namespace AnimeMe.Helpers
                 Console.WriteLine(returnData.message);
                 return returnData.message;
             }
+        }
+
+        public async Task<AnimeFeed> getAnimeFeed(string animeNameEN, string animeNameJP)
+        {
+            var builder = new UriBuilder("/anime/feed");
+
+            var query = HttpUtility.ParseQueryString(builder.Query);
+            query["animeNameEN"] = animeNameEN;
+            query["animeNameJP"] = animeNameJP;
+            builder.Query = query.ToString();
+
+            var authCode = Preferences.Get(SharedPreferences.AUTH_CODE, string.Empty);
+
+            HttpResponseMessage result = await get(builder.ToString(), new Dictionary<string, string> { { "authCode", authCode } });
+
+            if (result.IsSuccessStatusCode)
+            {
+                string content = await result.Content.ReadAsStringAsync();
+
+                return JsonConvert.DeserializeObject<AnimeFeed>(content);
+            }
+            return null;
         }
     }
 }

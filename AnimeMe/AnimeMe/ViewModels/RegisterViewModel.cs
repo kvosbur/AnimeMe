@@ -36,7 +36,7 @@ namespace AnimeMe.ViewModels
                 await Shell.Current.DisplayAlert("Register Error", response.message, "Ok");
                 return;
             }
-            await Shell.Current.GoToAsync($"//{nameof(AnimeMe.Views.Discover.DiscoverPage)}");
+            await Shell.Current.GoToAsync("//animeFeed");
         }
     }
 }

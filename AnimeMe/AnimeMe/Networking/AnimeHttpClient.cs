@@ -17,7 +17,7 @@ namespace AnimeMe.Networking
             httpClient = new HttpClient();
         }
 
-        protected async Task<string> get(string path, Dictionary<string, string> headers)
+        protected async Task<HttpResponseMessage> get(string path, Dictionary<string, string> headers)
         {
             Uri uri = new Uri(BASE_URL, path);
 
@@ -28,11 +28,7 @@ namespace AnimeMe.Networking
             }
 
             HttpResponseMessage responseMessage = await httpClient.SendAsync(request);
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                return await responseMessage.Content.ReadAsStringAsync();
-            }
-            return null;
+            return responseMessage;
         }
 
         protected async Task<string> get(string path)

@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace AnimeMe.Views.Discover
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DiscoverPage : ContentPage
+    public partial class SongFeedPage : ContentPage
     {
-        public DiscoverPage()
+        public SongFeedPage()
         {
             InitializeComponent();
         }

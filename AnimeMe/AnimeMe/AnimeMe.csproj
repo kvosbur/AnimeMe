@@ -16,9 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\Discover\DiscoverPage.xaml.cs">
-      <DependentUpon>DiscoverPage.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\Playlist\PlaylistPage.xaml.cs">
       <DependentUpon>PlaylistPage.xaml</DependentUpon>
     </Compile>
@@ -28,7 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\Discover\DiscoverPage.xaml">
+    <EmbeddedResource Update="Views\Discover\AnimeFeedPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Discover\SongFeedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Playlist\PlaylistPage.xaml">
