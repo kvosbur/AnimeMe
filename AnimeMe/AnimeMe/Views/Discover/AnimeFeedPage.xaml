@@ -3,28 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AnimeMe.Views.Discover.AnimeFeedPage">
     <ContentPage.Content>
-        <StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
             <Label TextColor="Black" Text="Anime Feed"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
 
             <ListView
+                Grid.Row="1"
                 ItemsSource="{Binding Feed}"
-                ItemSelected="OnAnimeSelected">
+                ItemSelected="OnAnimeSelected" RowHeight="80" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid>
+                            <Grid Margin="10">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="3*"/>
                                 </Grid.ColumnDefinitions>
                                 
-                                <Image Source="{Binding image}" Grid.RowSpan="2"/>
+                                <Image Source="{Binding image}" Grid.RowSpan="2" HorizontalOptions="Start"/>
                                 
                                 <Label
                                     Text="{Binding nameEnglish}"
@@ -43,6 +48,6 @@
                 </ListView.ItemTemplate>
                 
             </ListView>
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

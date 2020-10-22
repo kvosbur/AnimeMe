@@ -2,6 +2,7 @@
 using AnimeMe.Networking.NetworkModels.Anime;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace AnimeMe.ViewModels.Discover.Anime
@@ -9,8 +10,8 @@ namespace AnimeMe.ViewModels.Discover.Anime
     class AnimeFeedViewModel : BaseViewModel
     {
 
-        List<AnimeFeedDetail> feed = null;
-        public List<AnimeFeedDetail> Feed
+        ObservableCollection<AnimeFeedDetail> feed = new ObservableCollection<AnimeFeedDetail>();
+        public ObservableCollection<AnimeFeedDetail> Feed
         {
             get { return feed; }
             set { SetProperty(ref feed, value); }
@@ -28,7 +29,11 @@ namespace AnimeMe.ViewModels.Discover.Anime
             var results = await helper.getAnimeFeed("", "");
             if (results != null)
             {
-                feed = results.data;
+                feed.Clear();
+                foreach(AnimeFeedDetail afd in results.data)
+                {
+                    feed.Add(afd);
+                }
             }
         }
 
